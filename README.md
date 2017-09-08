@@ -2,6 +2,11 @@
 
 This SAMPLES is based on GS Selenium Commons Framework, that code can be used for anyone of wanna make test in Liferay using Selenium with BDD.
 
+## Samples:
+
+1. Login (positive and negative scenarios) [/src/functionalTest/resources/Login.feature]
+2. Add Portlet on screen (positive scenario) [/src/functionalTest/resources/WebContent.feature]
+
 ## How Use?
 
 1. Download the "BDD-selenium-sample-code.sh" file, into the project root folder.
@@ -24,7 +29,6 @@ This SAMPLES is based on GS Selenium Commons Framework, that code can be used fo
 ### Run by IDE.
 
 `runTest.java` into the src/functionalTest/java/com/liferay/samples/functional/test folder.
-
 
 ## Goal of wiki project
 
