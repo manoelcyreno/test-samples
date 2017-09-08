@@ -1,0 +1,115 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+group = 'com.liferay.samples'
+version = '1.0.0-SNAPSHOT'
+
+description = """Samples Functional Test Module"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+    mavenLocal()
+}
+
+project.ext {
+	junitVersion = '4.12'
+	seleniumVersion = '3.3.1'
+	cucumberVersion = '1.2.5'
+	splitestVersion = '0.1.6'
+	lfrgsSeleniumCommonsVersion = '1.0.4'
+}
+
+dependencies {
+	compile group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "2.0.0"
+	compile group: "javax.portlet", name: "portlet-api", version: "2.0"
+	compile group: "javax.servlet", name: "servlet-api", version: "2.5"
+	compile group: "org.osgi", name: "org.osgi.compendium", version: "5.0.0"
+    compile 'com.liferay.gs:lfrgs-selenium-commons:' + lfrgsSeleniumCommonsVersion
+    compile 'org.codehaus.groovy:groovy-all:2.4.5'
+	compile 'org.seleniumhq.selenium:selenium-firefox-driver:' + seleniumVersion
+	compile 'org.seleniumhq.selenium:selenium-api:' + seleniumVersion
+	compile 'org.seleniumhq.selenium:selenium-java:' + seleniumVersion
+	compile 'org.seleniumhq.selenium:selenium-remote-driver:' + seleniumVersion
+	compile 'org.seleniumhq.selenium:selenium-support:' + seleniumVersion
+
+    testCompile 'info.cukes:cucumber-java:' + cucumberVersion
+    testCompile 'info.cukes:cucumber-junit:' + cucumberVersion
+    testCompile 'junit:junit:' + junitVersion
+}
+
+tasks.withType(Test) {
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut"
+        showExceptions true
+        exceptionFormat "full"
+        showCauses true
+        showStackTraces true
+
+        afterSuite { desc, result ->
+            if (!desc.parent) {
+                def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+                def startItem = '|  ', endItem = '  |'
+                def repeatLength = startItem.length() + output.length() + endItem.length()
+                println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+            }
+        }
+    }
+}
+
+tasks.withType(Test) {
+    reports.html.destination = file("${reporting.baseDir}/${name}")
+}
+
+sourceSets {
+    functionalTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/functionalTest/java')
+        }
+        resources.srcDir file('src/functionalTest/resources')
+    }
+}
+
+configurations {
+    functionalTestCompile.extendsFrom testCompile
+    functionalTestRuntime.extendsFrom testRuntime
+}
+
+task cucumberTest(type: Test) {
+    description 'Runs the Cucumber Tests.'
+
+    testClassesDir = sourceSets.functionalTest.output.classesDir
+    classpath = sourceSets.functionalTest.runtimeClasspath
+    outputs.upToDateWhen { false }
+}
+
+check.dependsOn cucumberTest
+
+gradle.taskGraph.whenReady { graph ->
+    if (graph.hasTask(build)) {
+        cucumberTest.enabled = false
+    }
+}
+
+dependencies {
+    functionalTestCompile(
+            'info.cukes:cucumber-core:' + cucumberVersion,
+            'info.cukes:cucumber-java:' + cucumberVersion,
+            'info.cukes:cucumber-java:' + cucumberVersion,
+            'info.cukes:cucumber-junit:' + cucumberVersion,
+            'info.cukes:cucumber-spring:' + cucumberVersion,
+            'org.springframework:spring-beans:4.2.5.RELEASE'
+    )
+    functionalTestRuntime(
+            'org.springframework:spring-context:4.2.5.RELEASE',
+            'org.springframework:spring-test:4.2.5.RELEASE',
+            'org.springframework:spring-tx:4.2.5.RELEASE'
+    )
+}
