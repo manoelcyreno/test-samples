@@ -4,7 +4,16 @@ This SAMPLES is based on GS Selenium Commons Framework, that code can be used fo
 
 ## How Use
 
-In Progress
+1. Download the "BDD-selenium-sample-code.sh" file, into the project root folder.
+2. Set the permission to execute on "BDD-selenium-sample-code.sh" file (command: chmod +x BDD-selenium-sample-code.sh)
+3. Run the "BDD-selenium-sample-code.sh" file (command: ./BDD-selenium-sample-code.sh)
+
+### What this script will make?
+
+1. Create one backup of the "src" folder and "build.gradle" file.
+2. Create a temporary structure of sample code
+3. Copy this structure to "src" folder.
+4. Delete the temporary structure.
 
 ## Goal of wiki project
 
