@@ -1,7 +1,7 @@
 #language:en
 Feature: Login
 
-@Sanity
+@Login
 Scenario Outline: Perform the Login with success
 	Given I am on Home Page
 	When I fill the <login> and <password> I will be logged
@@ -11,6 +11,7 @@ Scenario Outline: Perform the Login with success
     |            login         |  password   | usernameAcronym  |
     |manoel.cyreno@liferay.com | test        |       MC         |
 
+@Login
 Scenario Outline: Perform the Login with fail
 	Given I am on Home Page
 	When I fill the <login> and <password> I will be logged

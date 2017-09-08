@@ -14,12 +14,12 @@ public class WelcomeStepDefinitions {
 	CommonMethods commonMethods = new CommonMethods();
 	WelcomePage welcomePage = new WelcomePage();
 
-	@When("^I will add a \"(.*)\" on Screen$")
-	public void i_will_add_a_portlet_on_screen(String portletName) {
-		commonMethods.addPortletOnScreen(portletName);
+	@When("^I will add a (-?[^\"]*) on (-?[^\"]*) of the Screen$")
+	public void i_will_add_a_portlet_on_column_of_the_screen(String portletName, String column) {
+		commonMethods.addPortletOnScreen(portletName, column);
 	}
 
-	@Then("^The \"(.*)\" will appear$")
+	@Then("^The (-?[^\"]*) will appear$")
 	public void the_portlet_will_appear(String portletName) {
 		WaitUtils.waitMediumTime();
 		assertEquals(true, welcomePage.portletIsDisplayed(portletName));

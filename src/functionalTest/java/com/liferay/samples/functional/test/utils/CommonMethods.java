@@ -18,8 +18,6 @@ public class CommonMethods {
 	private final By searchApplicationLocator = By.xpath(
 			".//*[@id='_com_liferay_product_navigation_control_menu_web_portlet_ProductNavigationControlMenuPortlet_searchApplication']");
 
-	private final By column1Locator = By.xpath(".//*[@id='column-1']");
-
 	public void waitElement(By locator) {
 		WaitUtils.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(locator));
 		WaitUtils.getWaitDriver().until(ExpectedConditions.elementToBeClickable(locator));
@@ -31,7 +29,7 @@ public class CommonMethods {
 		UtilsKeys.DRIVER.findElement(locator).sendKeys(text);
 	}
 
-	public void addPortletOnScreen(String portletName) {
+	public void addPortletOnScreen(String portletName, String column) {
 		WaitUtils.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(addButtonLocator));
 		WaitUtils.getWaitDriver().until(ExpectedConditions.elementToBeClickable(addButtonLocator));
 		UtilsKeys.DRIVER.findElement(addButtonLocator).click();
@@ -52,10 +50,12 @@ public class CommonMethods {
 				.xpath(".//*[@id='_com_liferay_product_navigation_control_menu_web_portlet_ProductNavigationControlMenuPortlet_portletCategory0']//*[contains (text(), '"
 						+ portletName + "')]");
 
+		By columnLocator = By.xpath(".//*[@id='" + column + "']");
+
 		WaitUtils.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(searchApplicationResultLocator));
 		WaitUtils.getWaitDriver().until(ExpectedConditions.elementToBeClickable(searchApplicationResultLocator));
 		WebElement element = UtilsKeys.DRIVER.findElement(searchApplicationResultLocator);
-		WebElement target = UtilsKeys.DRIVER.findElement(column1Locator);
+		WebElement target = UtilsKeys.DRIVER.findElement(columnLocator);
 		(new Actions(UtilsKeys.DRIVER)).dragAndDrop(element, target).perform();
 
 		WaitUtils.waitMediumTime();
