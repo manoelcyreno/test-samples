@@ -1,4 +1,5 @@
 #language:en
+@RunRemoveAllPortletsFromPage
 Feature: WebContent
 
 Background: Logged with success

@@ -1,7 +1,10 @@
 package com.liferay.samples.functional.test.utils;
 
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,6 +13,8 @@ import com.liferay.gs.testFramework.UtilsKeys;
 import com.liferay.gs.testFramework.WaitUtils;
 
 public class CommonMethods {
+
+	private Actions actionBuilder = new Actions(UtilsKeys.DRIVER);
 
 	private final By addButtonLocator = By.xpath(
 			".//*[@id='_com_liferay_product_navigation_control_menu_web_portlet_ProductNavigationControlMenuPortlet_addToggleId']");
@@ -30,20 +35,13 @@ public class CommonMethods {
 	}
 
 	public void addPortletOnScreen(String portletName, String column) {
-		WaitUtils.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(addButtonLocator));
-		WaitUtils.getWaitDriver().until(ExpectedConditions.elementToBeClickable(addButtonLocator));
-		UtilsKeys.DRIVER.findElement(addButtonLocator).click();
+		clickOnAddButton();
+		clickOnApplicationCategory();
+		searchForPortletByName(portletName);
+		dragAndDropPortletToColumn(portletName, column);
+	}
 
-		WaitUtils.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(applicationHeadingLocator));
-		WaitUtils.getWaitDriver().until(ExpectedConditions.elementToBeClickable(applicationHeadingLocator));
-		// TODO Create a Javascript IF
-		// colocar um if pra validar se esse elemento já esta aberto ou não, se
-		// tiver não faz nada se não tiver ele abre o elemento
-		// UtilsKeys.DRIVER.findElement(applicationHeadingLocator).click();
-
-		WaitUtils.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(searchApplicationLocator));
-		WaitUtils.getWaitDriver().until(ExpectedConditions.elementToBeClickable(searchApplicationLocator));
-		UtilsKeys.DRIVER.findElement(searchApplicationLocator).sendKeys(portletName);
+	private void dragAndDropPortletToColumn(String portletName, String column) {
 		WaitUtils.waitMediumTime();
 
 		By searchApplicationResultLocator = By
@@ -57,11 +55,63 @@ public class CommonMethods {
 		WebElement element = UtilsKeys.DRIVER.findElement(searchApplicationResultLocator);
 		WebElement target = UtilsKeys.DRIVER.findElement(columnLocator);
 		(new Actions(UtilsKeys.DRIVER)).dragAndDrop(element, target).perform();
-
 		WaitUtils.waitMediumTime();
-		UtilsKeys.DRIVER.findElement(applicationHeadingLocator).click();
-		UtilsKeys.DRIVER.findElement(addButtonLocator).click();
-
 	}
 
+	public void removeAllPorlets() {
+		List<WebElement> portlets = UtilsKeys.DRIVER.findElements(By.cssSelector(".portlet-layout .portlet"));
+		for (WebElement portlet : portlets) {
+			openPortletActionDropDown(portlet);
+			clickOnPortletConfigurationMenu("Remove");
+			acceptBrowserDialog();
+		}
+	}
+
+	private void searchForPortletByName(String portletName) {
+		WaitUtils.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(searchApplicationLocator));
+		WaitUtils.getWaitDriver().until(ExpectedConditions.elementToBeClickable(searchApplicationLocator));
+		UtilsKeys.DRIVER.findElement(searchApplicationLocator).sendKeys(portletName);
+	}
+
+	private void clickOnAddButton() {
+		WaitUtils.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(addButtonLocator));
+		WaitUtils.getWaitDriver().until(ExpectedConditions.elementToBeClickable(addButtonLocator));
+		UtilsKeys.DRIVER.findElement(addButtonLocator).click();
+	}
+
+	private void clickOnApplicationCategory() {
+		WaitUtils.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(applicationHeadingLocator));
+		WaitUtils.getWaitDriver().until(ExpectedConditions.elementToBeClickable(applicationHeadingLocator));
+
+		By portletContentCategories = By.cssSelector(".add-content-menu .lfr-content-category");
+		boolean isApplicationCategoriesDisplayed = UtilsKeys.DRIVER.findElement(portletContentCategories).isDisplayed();
+
+		if (!isApplicationCategoriesDisplayed) {
+			WaitUtils.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(applicationHeadingLocator));
+			WaitUtils.getWaitDriver().until(ExpectedConditions.elementToBeClickable(applicationHeadingLocator));
+			UtilsKeys.DRIVER.findElement(applicationHeadingLocator).click();
+		}
+	}
+
+	private void openPortletActionDropDown(WebElement portletElement) {
+		WebElement configButton = portletElement.findElement(By.cssSelector(".lexicon-icon-ellipsis-v"));
+		actionBuilder.moveToElement(configButton).pause(Duration.ofMillis(200)).perform();
+		configButton.click();
+	}
+
+	private void clickOnPortletConfigurationMenu(String title) {
+		By dropDownMenu = By.cssSelector(".dropdown-menu");
+		WaitUtils.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(dropDownMenu));
+
+		WebElement dropDownMenuElement = UtilsKeys.DRIVER.findElement(dropDownMenu);
+
+		List<WebElement> elements = dropDownMenuElement.findElements(By.cssSelector("li a.lfr-icon-item"));
+		WebElement element = elements.stream().filter(el -> el.getText().trim().equals(title)).findFirst().get();
+		element.click();
+	}
+
+	private static void acceptBrowserDialog() {
+		Alert alert = UtilsKeys.DRIVER.switchTo().alert();
+		alert.accept();
+	}
 }
