@@ -67,6 +67,15 @@ public class CommonMethods {
 		}
 	}
 
+	public void removeAllSpecificPorlets(String partOfPortletID) {
+		List<WebElement> portlets = UtilsKeys.DRIVER.findElements(By.xpath(".//*[contains(@id,'"+partOfPortletID+"')]"));
+		for (WebElement portlet : portlets) {
+			openPortletActionDropDown(portlet);
+			clickOnPortletConfigurationMenu("Remove");
+			acceptBrowserDialog();
+		}
+	}
+
 	private void searchForPortletByName(String portletName) {
 		WaitUtils.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(searchApplicationLocator));
 		WaitUtils.getWaitDriver().until(ExpectedConditions.elementToBeClickable(searchApplicationLocator));
