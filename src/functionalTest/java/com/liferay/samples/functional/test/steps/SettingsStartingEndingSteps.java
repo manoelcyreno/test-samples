@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
-import com.liferay.gs.testFramework.UtilsKeys;
+import com.liferay.gs.testFramework.SeleniumReadPropertyKeys;
 import com.liferay.samples.functional.test.utils.CommonMethods;
 
 import cucumber.api.Scenario;
@@ -18,9 +18,9 @@ public class SettingsStartingEndingSteps {
 
 	@Before
 	public void beforeScenario() {
-		UtilsKeys.DRIVER.get(UtilsKeys.getUrlToHome());
-		UtilsKeys.DRIVER.manage().window().maximize();
-		UtilsKeys.DRIVER.manage().timeouts().implicitlyWait(UtilsKeys.getTimeOut(), TimeUnit.SECONDS);
+		SeleniumReadPropertyKeys.DRIVER.get(SeleniumReadPropertyKeys.getUrlToHome());
+		SeleniumReadPropertyKeys.DRIVER.manage().window().maximize();
+		SeleniumReadPropertyKeys.DRIVER.manage().timeouts().implicitlyWait(SeleniumReadPropertyKeys.getTimeOut(), TimeUnit.SECONDS);
 	}
 
 //	@After(value = "@RunRemoveAllPortletsFromPage")
@@ -31,10 +31,10 @@ public class SettingsStartingEndingSteps {
 	@After
 	public void afterScenario(Scenario scenario) {
 		if (scenario.isFailed()) {
-			byte[] screenshot = ((TakesScreenshot) UtilsKeys.DRIVER).getScreenshotAs(OutputType.BYTES);
+			byte[] screenshot = ((TakesScreenshot) SeleniumReadPropertyKeys.DRIVER).getScreenshotAs(OutputType.BYTES);
 			scenario.embed(screenshot, "image/png");
 		}
 
-		UtilsKeys.DRIVER.navigate().to(UtilsKeys.getUrlToHome() + UtilsKeys.getLinkToLogOut());
+		SeleniumReadPropertyKeys.DRIVER.navigate().to(SeleniumReadPropertyKeys.getUrlToHome() + SeleniumReadPropertyKeys.getLinkToLogOut());
 	}
 }

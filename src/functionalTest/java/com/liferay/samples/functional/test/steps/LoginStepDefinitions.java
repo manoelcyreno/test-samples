@@ -2,7 +2,7 @@ package com.liferay.samples.functional.test.steps;
 
 import static org.junit.Assert.assertEquals;
 
-import com.liferay.gs.testFramework.UtilsKeys;
+import com.liferay.gs.testFramework.SeleniumReadPropertyKeys;
 import com.liferay.samples.functional.test.pages.LoginPage;
 import com.liferay.samples.functional.test.pages.WelcomePage;
 
@@ -17,7 +17,7 @@ public class LoginStepDefinitions {
 
 	@Given("^I am on Home Page$")
 	public void i_am_on_home_page() {
-		UtilsKeys.DRIVER.get(UtilsKeys.getUrlToHome());
+		SeleniumReadPropertyKeys.DRIVER.get(SeleniumReadPropertyKeys.getUrlToHome());
 	}
 
 	@When("^I fill the (-?[^\"]*) and (-?[^\"]*) I will be logged$")

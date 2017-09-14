@@ -2,7 +2,7 @@ package com.liferay.samples.functional.test.pages;
 
 import org.openqa.selenium.By;
 
-import com.liferay.gs.testFramework.UtilsKeys;
+import com.liferay.gs.testFramework.SeleniumReadPropertyKeys;
 import com.liferay.samples.functional.test.utils.CommonMethods;
 
 public class UserPage {
@@ -28,12 +28,12 @@ public class UserPage {
 
 	public void clickOnAddButton() {
 		commonMethods.waitElement(addButtonLocator);
-		UtilsKeys.DRIVER.findElement(addButtonLocator).click();
+		SeleniumReadPropertyKeys.DRIVER.findElement(addButtonLocator).click();
 	}
 
 	public void clickOnSaveButton() {
 		commonMethods.waitElement(saveButtonLocator);
-		UtilsKeys.DRIVER.findElement(saveButtonLocator).click();
+		SeleniumReadPropertyKeys.DRIVER.findElement(saveButtonLocator).click();
 	}
 
 	public void fillScreenNameField(String screenName) {
@@ -64,7 +64,7 @@ public class UserPage {
 		By screenNameOnTableLocator = By
 				.xpath(".//*[@id='_com_liferay_users_admin_web_portlet_UsersAdminPortlet_usersSearchContainer']//*[contains(text(), '"
 						+ screenName + "')]");
-		return UtilsKeys.DRIVER.findElement(screenNameOnTableLocator).isDisplayed();
+		return SeleniumReadPropertyKeys.DRIVER.findElement(screenNameOnTableLocator).isDisplayed();
 	}
 
 }

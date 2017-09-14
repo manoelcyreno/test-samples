@@ -2,7 +2,7 @@ package com.liferay.samples.functional.test.steps;
 
 import static org.junit.Assert.assertEquals;
 
-import com.liferay.gs.testFramework.WaitUtils;
+import com.liferay.gs.testFramework.SeleniumWaitMethods;
 import com.liferay.samples.functional.test.pages.UserPage;
 import com.liferay.samples.functional.test.pages.WelcomePage;
 
@@ -35,7 +35,7 @@ public class UserStepDefinitions {
 
 	@Then("^The (-?[^\"]*) will appear on user list$")
 	public void the_ScreenName_will_appear_on_user_list(String screenName) {
-		WaitUtils.waitMediumTime();
+		SeleniumWaitMethods.waitMediumTime();
 		welcomePage.clickOnMenuButton();
 		welcomePage.clickOnControlPanel();
 		welcomePage.clickOnUsers();

@@ -3,8 +3,8 @@ package com.liferay.samples.functional.test.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.liferay.gs.testFramework.UtilsKeys;
-import com.liferay.gs.testFramework.WaitUtils;
+import com.liferay.gs.testFramework.SeleniumReadPropertyKeys;
+import com.liferay.gs.testFramework.SeleniumWaitMethods;
 import com.liferay.samples.functional.test.utils.CommonMethods;
 
 public class LoginPage {
@@ -35,27 +35,27 @@ public class LoginPage {
 
 	public void clickOnSignIn() {
 		commonMethods.waitElement(signInLocator);
-		UtilsKeys.DRIVER.findElement(signInLocator).click();
+		SeleniumReadPropertyKeys.DRIVER.findElement(signInLocator).click();
 	}
 
 	public void clickOnSignInOfTheModal() {
 		commonMethods.waitElement(signInButtonOnModalLocator);
-		UtilsKeys.DRIVER.findElement(signInButtonOnModalLocator).click();
+		SeleniumReadPropertyKeys.DRIVER.findElement(signInButtonOnModalLocator).click();
 	}
 
 	public boolean alertErrorIsDisplayed() {
-		WaitUtils.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(alertErrorLocator));
-		return UtilsKeys.DRIVER.findElement(alertErrorLocator).isDisplayed();
+		SeleniumWaitMethods.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(alertErrorLocator));
+		return SeleniumReadPropertyKeys.DRIVER.findElement(alertErrorLocator).isDisplayed();
 	}
 
 	public boolean loginHelperIsDisplayed() {
-		WaitUtils.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(loginHelperLocator));
-		return UtilsKeys.DRIVER.findElement(loginHelperLocator).isDisplayed();
+		SeleniumWaitMethods.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(loginHelperLocator));
+		return SeleniumReadPropertyKeys.DRIVER.findElement(loginHelperLocator).isDisplayed();
 	}
 
 	public boolean passwordHelperIsDisplayed() {
-		WaitUtils.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(passwordHelperLocator));
-		return UtilsKeys.DRIVER.findElement(passwordHelperLocator).isDisplayed();
+		SeleniumWaitMethods.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(passwordHelperLocator));
+		return SeleniumReadPropertyKeys.DRIVER.findElement(passwordHelperLocator).isDisplayed();
 	}
 
 }
