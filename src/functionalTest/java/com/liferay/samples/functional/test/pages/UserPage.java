@@ -26,6 +26,9 @@ public class UserPage {
 	private final By RepeatPasswordLocator = By
 			.xpath(".//*[@id='_com_liferay_users_admin_web_portlet_UsersAdminPortlet_password2']");
 
+	private final By saveMessageLocator = By.xpath(
+			".//div[contains(@class, 'alert-success') and contains(@class, 'alert-success-content') and contains(@class, 'alert')]");
+
 	public void clickOnAddButton() {
 		commonMethods.waitElement(addButtonLocator);
 		SeleniumReadPropertyKeys.DRIVER.findElement(addButtonLocator).click();
@@ -34,6 +37,7 @@ public class UserPage {
 	public void clickOnSaveButton() {
 		commonMethods.waitElement(saveButtonLocator);
 		SeleniumReadPropertyKeys.DRIVER.findElement(saveButtonLocator).click();
+		commonMethods.waitElement(saveMessageLocator);
 	}
 
 	public void fillScreenNameField(String screenName) {

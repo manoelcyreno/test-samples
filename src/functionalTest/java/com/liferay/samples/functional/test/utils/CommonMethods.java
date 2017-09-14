@@ -18,5 +18,4 @@ public class CommonMethods {
 		SeleniumReadPropertyKeys.DRIVER.findElement(locator).clear();
 		SeleniumReadPropertyKeys.DRIVER.findElement(locator).sendKeys(text);
 	}
-
 }

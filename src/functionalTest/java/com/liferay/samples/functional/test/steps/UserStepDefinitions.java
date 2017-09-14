@@ -2,7 +2,6 @@ package com.liferay.samples.functional.test.steps;
 
 import static org.junit.Assert.assertEquals;
 
-import com.liferay.gs.testFramework.SeleniumWaitMethods;
 import com.liferay.samples.functional.test.pages.UserPage;
 import com.liferay.samples.functional.test.pages.WelcomePage;
 
@@ -21,7 +20,6 @@ public class UserStepDefinitions {
 		welcomePage.clickOnControlPanel();
 		welcomePage.clickOnUsers();
 		welcomePage.clickOnUsersAndOrganizations();
-		welcomePage.clickOnMenuButton();
 		userPage.clickOnAddButton();
 		userPage.fillScreenNameField(screenName);
 		userPage.fillEmailAddressField(emailAddress);
@@ -35,12 +33,9 @@ public class UserStepDefinitions {
 
 	@Then("^The (-?[^\"]*) will appear on user list$")
 	public void the_ScreenName_will_appear_on_user_list(String screenName) {
-		SeleniumWaitMethods.waitMediumTime();
-		welcomePage.clickOnMenuButton();
-		welcomePage.clickOnControlPanel();
-		welcomePage.clickOnUsers();
 		welcomePage.clickOnUsersAndOrganizations();
-		assertEquals(true, userPage.isScreenNameDisplayedOnUserTable(screenName));
+		Boolean screenNameDisplayed = userPage.isScreenNameDisplayedOnUserTable(screenName);
+		assertEquals(true, screenNameDisplayed);
 	}
 
 }

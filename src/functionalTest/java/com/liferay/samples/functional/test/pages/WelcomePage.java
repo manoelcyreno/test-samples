@@ -17,13 +17,23 @@ public class WelcomePage {
 			".//*[@id='_com_liferay_product_navigation_product_menu_web_portlet_ProductMenuPortlet_control_panelHeading']//a[@data-qa-id='productMenuControlPanelCategory']");
 	private final By usersLocator = By.xpath(
 			".//*[@id='_com_liferay_product_navigation_product_menu_web_portlet_ProductMenuPortlet_control_panelCollapse']//a[(@data-qa-id='appGroup') and contains(text(), 'Us')]");
+	private static By addButtonLocator = By.xpath(
+			".//*[@id='_com_liferay_product_navigation_control_menu_web_portlet_ProductNavigationControlMenuPortlet_addToggleId']");
 
+	private static void clickOnAddButton() {
+		SeleniumWaitMethods.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(addButtonLocator));
+		SeleniumWaitMethods.getWaitDriver().until(ExpectedConditions.elementToBeClickable(addButtonLocator));
+		SeleniumReadPropertyKeys.DRIVER.findElement(addButtonLocator).click();
+		SeleniumWaitMethods.waitMediumTime();
+	}
 
 	public void clickOnMenuButton() {
-		// TODO Create a Javascript IF
-		// colocar um if pra validar se esse elemento já esta aberto ou não, se
-		// tiver não faz nada se não tiver ele abre o elemento
+		clickOnAddButton();
+		commonMethods.waitElement(menuLocator);
+		SeleniumReadPropertyKeys.DRIVER.findElement(menuLocator).click();
+	}
 
+	public void clickOnMenuToCloseButton() {
 		commonMethods.waitElement(menuLocator);
 		SeleniumReadPropertyKeys.DRIVER.findElement(menuLocator).click();
 	}
@@ -51,7 +61,8 @@ public class WelcomePage {
 				.xpath(".//*[contains(@id, 'p_p_id_com_liferay_product_navigation_user_personal_bar_web_portlet_ProductNavigationUserPersonalBarPortlet_')]//*[contains(text(), '"
 						+ usernameAcronym + "')]");
 
-		SeleniumWaitMethods.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(usernameAcronymLocator));
+		SeleniumWaitMethods.getWaitDriver()
+				.until(ExpectedConditions.visibilityOfElementLocated(usernameAcronymLocator));
 
 		return SeleniumReadPropertyKeys.DRIVER.findElement(usernameAcronymLocator).isDisplayed();
 	}
