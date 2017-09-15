@@ -5,14 +5,12 @@ import static org.junit.Assert.assertEquals;
 import com.liferay.gs.testFramework.SeleniumCommonMethods;
 import com.liferay.gs.testFramework.SeleniumWaitMethods;
 import com.liferay.samples.functional.test.pages.WelcomePage;
-import com.liferay.samples.functional.test.utils.CommonMethods;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class WelcomeStepDefinitions {
 
-	CommonMethods commonMethods = new CommonMethods();
 	WelcomePage welcomePage = new WelcomePage();
 
 	@When("^I will add a (-?[^\"]*) on (-?[^\"]*) of the Screen$")

@@ -33,11 +33,6 @@ public class WelcomePage {
 		SeleniumReadPropertyKeys.DRIVER.findElement(menuLocator).click();
 	}
 
-	public void clickOnMenuToCloseButton() {
-		commonMethods.waitElement(menuLocator);
-		SeleniumReadPropertyKeys.DRIVER.findElement(menuLocator).click();
-	}
-
 	public void clickOnControlPanel() {
 		commonMethods.waitElement(controlPanelLocator);
 		SeleniumReadPropertyKeys.DRIVER.findElement(controlPanelLocator).click();

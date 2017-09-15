@@ -6,7 +6,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 import com.liferay.gs.testFramework.SeleniumReadPropertyKeys;
-import com.liferay.samples.functional.test.utils.CommonMethods;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -14,7 +13,7 @@ import cucumber.api.java.Before;
 
 public class SettingsStartingEndingSteps {
 
-	CommonMethods commonMethods = new CommonMethods();
+//	CommonMethods commonMethods = new CommonMethods();
 
 	@Before
 	public void beforeScenario() {

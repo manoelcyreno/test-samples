@@ -5,9 +5,9 @@ import cucumber.api.java.en.Then;
 
 public class BackgroungStepDefinitions {
 
-	private final String liferayPortalUser = "manoel.cyreno@liferay.com";
-	private final String liferayPortalPassword = "test";
-	private final String liferayPortalUsernameAcronym = "MC";
+	private static final String liferayPortalUser = "manoel.cyreno@liferay.com";
+	private static final String liferayPortalPassword = "test";
+	private static final String liferayPortalUsernameAcronym = "MC";
 
 	LoginStepDefinitions lsd = new LoginStepDefinitions();
 
