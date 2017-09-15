@@ -1,6 +1,6 @@
 #language:en
 @RunRemoveAllPortletsFromPage
-Feature: WebContent
+Feature: Portlet
 
 Background: Logged with success
     Given the user is logged in liferay portal
