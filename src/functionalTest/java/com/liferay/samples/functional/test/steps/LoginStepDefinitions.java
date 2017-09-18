@@ -35,7 +35,7 @@ public class LoginStepDefinitions {
 
 	@Then("^The error message will appear related with (-?[^\"]*)$")
 	public void the_error_message_will_appear_related_with(String wrongField) {
-		switch (wrongField) {
+		switch (wrongField.toLowerCase().toString()) {
 		case "both":
 			assertEquals(true, loginPage.alertErrorIsDisplayed());
 			break;

@@ -20,6 +20,13 @@ public class WelcomePage {
 	private static By addButtonLocator = By.xpath(
 			".//*[@id='_com_liferay_product_navigation_control_menu_web_portlet_ProductNavigationControlMenuPortlet_addToggleId']");
 
+	private static By navigationLocator = By.xpath(
+			".//*[@id='_com_liferay_product_navigation_product_menu_web_portlet_ProductMenuPortlet_site_administrationCollapse']//a[contains(@href, 'navigation')]");
+	private static By publicPagesOptionsLocator = By.xpath(
+			".//*[@id='_com_liferay_product_navigation_product_menu_web_portlet_ProductMenuPortlet_layoutsTreeContainer']//a[(@data-qa-id='publicPagesOptions')]");
+	private static By addPublicPageLocator = By.xpath(".//a[(@data-qa-id='addPublicPage')]");
+	private static By addPrivatePageLocator = By.xpath(".//a[(@data-qa-id='addPrivatePage')]");
+
 	private static void clickOnAddButton() {
 		SeleniumWaitMethods.getWaitDriver().until(ExpectedConditions.visibilityOfElementLocated(addButtonLocator));
 		SeleniumWaitMethods.getWaitDriver().until(ExpectedConditions.elementToBeClickable(addButtonLocator));
@@ -52,8 +59,8 @@ public class WelcomePage {
 	}
 
 	public boolean usernameIsDisplayed(String usernameAcronym) {
-		By usernameAcronymLocator = By
-				.xpath(".//*[contains(@id, 'p_p_id_com_liferay_product_navigation_user_personal_bar_web_portlet_ProductNavigationUserPersonalBarPortlet_')]//*[contains(text(), '"
+		By usernameAcronymLocator = By.xpath(
+				".//*[contains(@id, 'p_p_id_com_liferay_product_navigation_user_personal_bar_web_portlet_ProductNavigationUserPersonalBarPortlet_')]//*[contains(text(), '"
 						+ usernameAcronym + "')]");
 
 		SeleniumWaitMethods.getWaitDriver()
@@ -63,11 +70,38 @@ public class WelcomePage {
 	}
 
 	public boolean portletIsDisplayed(String portletName) {
-		By portletNameLocator = By
-				.xpath("//*[contains(@id, 'portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet')]//*[contains(text(), '"
+		By portletNameLocator = By.xpath(
+				"//*[contains(@id, 'portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet')]//*[contains(text(), '"
 						+ portletName + "')]");
 
 		return SeleniumReadPropertyKeys.DRIVER.findElement(portletNameLocator).isEnabled();
 	}
 
+	public void clickOnNavigation() {
+		SeleniumWaitMethods.waitMediumTime();
+		commonMethods.waitElement(navigationLocator);
+
+		boolean isPublicPagesOptionsLocatorDisplayed = SeleniumReadPropertyKeys.DRIVER
+				.findElement(publicPagesOptionsLocator).isDisplayed();
+
+		if (!isPublicPagesOptionsLocatorDisplayed) {
+			SeleniumReadPropertyKeys.DRIVER.findElement(navigationLocator).click();
+		}
+
+	}
+
+	public void clickOnPublicPagesOptions() {
+		commonMethods.waitElement(publicPagesOptionsLocator);
+		SeleniumReadPropertyKeys.DRIVER.findElement(publicPagesOptionsLocator).click();
+	}
+
+	public void clickOnAddPublicPage() {
+		commonMethods.waitElement(addPublicPageLocator);
+		SeleniumReadPropertyKeys.DRIVER.findElement(addPublicPageLocator).click();
+	}
+
+	public void clickOnAddPrivatePage() {
+		commonMethods.waitElement(addPrivatePageLocator);
+		SeleniumReadPropertyKeys.DRIVER.findElement(addPrivatePageLocator).click();
+	}
 }
