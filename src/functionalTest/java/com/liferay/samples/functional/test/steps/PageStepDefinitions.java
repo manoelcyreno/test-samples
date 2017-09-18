@@ -14,7 +14,6 @@ public class PageStepDefinitions {
 
 	PagePage pagePage = new PagePage();
 	WelcomePage welcomePage = new WelcomePage();
-	BackgroungStepDefinitions backgroungStepDefinitions = new BackgroungStepDefinitions();
 
 	@When("^I will create a page with the info: (-?[^\"]*), (-?[^\"]*)$")
 	public void i_will_create_a_page_with_the_info_PublicOrPrivate_PageName(String publicOrPrivate, String pageName) {
@@ -43,9 +42,6 @@ public class PageStepDefinitions {
 
 		String newPageName = removeWhiteSpace(pageName);
 		String url = SeleniumReadPropertyKeys.DRIVER.getCurrentUrl();
-
-		System.out.println(url.toString());
-		System.out.println(newPageName.toString());
 
 		if (url.contains(newPageName)) {
 			assertTrue(true);
