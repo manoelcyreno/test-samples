@@ -5,7 +5,9 @@ This SAMPLES is based on GS Selenium Commons Framework, that code can be used fo
 ## Samples:
 
 1. Login (positive and negative scenarios) [/src/functionalTest/resources/Login.feature]
-2. Add Portlet on screen (positive scenario) [/src/functionalTest/resources/WebContent.feature]
+2. Add Portlet on screen (positive scenario) [/src/functionalTest/resources/Portlet.feature]
+3. Create User on screen (positive scenario) [/src/functionalTest/resources/User.feature]
+4. Create Page (positive scenario) [/src/functionalTest/resources/Page.feature]
 
 ## How Use?
 
