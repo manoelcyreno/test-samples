@@ -11,7 +11,7 @@ This SAMPLES is based on GS Selenium Commons Framework, that code can be used fo
 
 ## How Use?
 
-1. Download the "BDD-selenium-sample-code.sh" file, into the project root folder.
+1. Download the "BDD-selenium-sample-code.sh" file, into the Gradle project root folder.
 2. Set the permission to execute on "BDD-selenium-sample-code.sh" file (command: chmod +x BDD-selenium-sample-code.sh)
 3. Run the "BDD-selenium-sample-code.sh" file (command: ./BDD-selenium-sample-code.sh)
 
