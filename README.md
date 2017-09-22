@@ -14,6 +14,7 @@ This SAMPLES is based on GS Selenium Commons Framework, that code can be used fo
 1. Download the "BDD-selenium-sample-code.sh" file, into the Gradle project root folder.
 2. Set the permission to execute on "BDD-selenium-sample-code.sh" file (command: chmod +x BDD-selenium-sample-code.sh)
 3. Run the "BDD-selenium-sample-code.sh" file (command: ./BDD-selenium-sample-code.sh)
+4. Configure your `defaultProperties.properties` and your `web driver` according the Framework Setup (https://github.com/manoelcyreno/lfrgs-selenium-commons/wiki/Setup)
 
 ### What this script will make?
 
