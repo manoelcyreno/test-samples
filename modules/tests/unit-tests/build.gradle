@@ -1,0 +1,97 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+group = 'com.liferay.samples'
+version = '1.0.0-SNAPSHOT'
+
+description = """Samples Unit Test Module"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+    mavenLocal()
+}
+
+project.ext {
+	junitVersion = '4.12'
+	mockitoVersion = '2.10.0'
+}
+
+dependencies {
+	
+	compile 'org.codehaus.groovy:groovy-all:2.4.5'
+		
+	testCompile 'junit:junit:' + junitVersion	
+	testCompile 'org.mockito:mockito-core:' + mockitoVersion	
+}
+
+tasks.withType(Test) {
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut"
+        showExceptions true
+        exceptionFormat "full"
+        showCauses true
+        showStackTraces true
+
+        afterSuite { desc, result ->
+            if (!desc.parent) {
+                def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+                def startItem = '|  ', endItem = '  |'
+                def repeatLength = startItem.length() + output.length() + endItem.length()
+                println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+            }
+        }
+    }
+}
+
+tasks.withType(Test) {
+    reports.html.destination = file("${reporting.baseDir}/${name}")
+}
+
+sourceSets {
+    unitTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/unitTest/java')
+        }
+        resources.srcDir file('src/unitTest/resources')
+    }
+}
+
+configurations {
+    unitTestCompile.extendsFrom testCompile
+    unitTestRuntime.extendsFrom testRuntime
+}
+
+task unitTest(type: Test) {
+    description 'Runs the Unit Tests.'
+
+    testClassesDir = sourceSets.unitTest.output.classesDir
+    classpath = sourceSets.unitTest.runtimeClasspath
+    outputs.upToDateWhen { false }
+}
+
+check.dependsOn unitTest
+
+gradle.taskGraph.whenReady { graph ->
+    if (graph.hasTask(build)) {
+        unitTest.enabled = false
+    }
+}
+
+dependencies {
+	unitTestCompile(
+            'org.springframework:spring-beans:4.2.5.RELEASE'
+    )
+    unitTestRuntime(
+            'org.springframework:spring-context:4.2.5.RELEASE',
+            'org.springframework:spring-test:4.2.5.RELEASE',
+            'org.springframework:spring-tx:4.2.5.RELEASE'
+    )
+}
