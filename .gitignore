@@ -47,7 +47,8 @@ fabric.properties
 *.ear
 .gradle
 /build/
-/reports/
+/modules/tests/functional-tests/reports/
+/modules/tests/unit-tests/reports/
 /caches/
 /daemon/
 /native/

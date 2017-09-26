@@ -1,1 +1,56 @@
 rootProject.name = 'lfrgs-selenium-samples'
+
+gradle.allprojects {
+	buildscript {
+		repositories {
+	        mavenLocal()
+
+			maven {
+				url "https://repository.liferay.com/nexus/content/repositories/liferay-public-releases/"
+			}
+
+			maven {
+				url "https://repository.liferay.com/nexus/content/groups/public/"
+			}
+
+			mavenCentral()
+		}
+	}
+
+	repositories {
+        mavenLocal()
+
+		maven {
+			url "https://repository.liferay.com/nexus/content/repositories/liferay-public-releases/"
+		}
+
+		maven {
+			url "https://repository.liferay.com/nexus/content/groups/public/"
+		}
+
+		mavenCentral()
+	}
+
+}
+
+buildscript {
+	dependencies {
+		classpath group: "com.liferay", name: "com.liferay.gradle.plugins.workspace", version: "1.5.1"
+	}
+
+	repositories {
+        mavenLocal()
+
+		maven {
+			url "https://repository.liferay.com/nexus/content/repositories/liferay-public-releases/"
+		}
+
+		maven {
+			url "https://repository.liferay.com/nexus/content/groups/public/"
+		}
+
+		mavenCentral()
+	}
+}
+
+apply plugin: "com.liferay.workspace"

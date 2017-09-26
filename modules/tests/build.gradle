@@ -1,7 +1,0 @@
-configure(subprojects.findAll { !it.subprojects }) {
-    afterEvaluate { project ->
-        deploy {
-            enabled=false
-        }
-    }
-}
