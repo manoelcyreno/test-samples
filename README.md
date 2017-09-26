@@ -33,12 +33,12 @@ These SAMPLES are based on GS Selenium Commons Framework, that code can be used 
 ### Run by line command.
 
 `./gradlew cucumberTest` into the root folder or into the functional-tests folder.
-`./gradlew unitTest` into the root folder or into the unit-tests folder.
+<br> `./gradlew unitTest` into the root folder or into the unit-tests folder.
 
 ### Run by IDE.
 
 `runTest.java` into the src/functionalTest/java/com/liferay/samples/functional/test folder.
-`runTest.java` into the src/unitTest/java/com/liferay/samples(1 or 2)/unit/test folder.
+<br> `runTest.java` into the src/unitTest/java/com/liferay/samples(1 or 2)/unit/test folder.
 
 ## Goal of wiki project
 
