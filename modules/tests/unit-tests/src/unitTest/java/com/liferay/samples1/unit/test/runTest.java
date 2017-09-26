@@ -15,32 +15,32 @@ public class runTest {
 	IStudent student = mock(IStudent.class);
 
 	@Test
-	public void testeAlunoAprovado() {
+	public void testStudentApproved() {
 		when(student.getTestGrade()).thenReturn(7.0);
 		when(student.getWorkGrade()).thenReturn(7.0);
 
-		String resultado = evaluation.evaluate(student);
+		String result = evaluation.evaluate(student);
 
-		Assert.assertEquals("Approved", resultado);
+		Assert.assertEquals("Approved", result);
 	}
 
 	@Test
-	public void testeAlunoReporNotaTrabalho() {
+	public void testStudentResetTheJob() {
 		when(student.getTestGrade()).thenReturn(7.0);
 		when(student.getWorkGrade()).thenReturn(6.9);
 
-		String resultado = evaluation.evaluate(student);
+		String result = evaluation.evaluate(student);
 
-		Assert.assertEquals("You will need to reset the job", resultado);
+		Assert.assertEquals("You will need to reset the job", result);
 	}
 
 	@Test
-	public void testeAlunoDeRecuperacao() {
+	public void testStudentProofOfRecovery() {
 		when(student.getTestGrade()).thenReturn(6.9);
 		when(student.getWorkGrade()).thenReturn(0.0);
 
-		String resultado = evaluation.evaluate(student);
+		String result = evaluation.evaluate(student);
 
-		Assert.assertEquals("You will have to take proof of recovery", resultado);
+		Assert.assertEquals("You will have to take proof of recovery", result);
 	}
 }
