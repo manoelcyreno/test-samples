@@ -26,6 +26,11 @@ public class SettingsStartingEndingSteps {
 //	public void removeAllPortletsFromPage() {
 //		commonMethods.removeAllPorlets();
 //	}
+	
+	@After(value = "@AfterForForms")
+	public void afterForForms() {
+		SeleniumReadPropertyKeys.DRIVER.navigate().to("https://forms.liferay.com/" + SeleniumReadPropertyKeys.getLinkToLogOut());
+	}
 
 	@After
 	public void afterScenario(Scenario scenario) {
