@@ -1,6 +1,6 @@
-# Welcome to Test Samples in Liferay.
+# Welcome to Liferay GS Tests Samples.
 
-These SAMPLES are based on GS Selenium Commons Framework, that code can be used for anyone of wanna make tests in Liferay using Selenium with BDD.
+These SAMPLES are based on Liferay GS Selenium Commons Framework, that code can be used for anyone of wanna make tests in Liferay using Selenium with BDD.
 
 ## BDD Samples (Functional Tests):
 
