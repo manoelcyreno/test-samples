@@ -8,6 +8,7 @@ These SAMPLES are based on Liferay GS Selenium Commons Framework, that code can 
 2. Add Portlet on screen (positive scenario) [/src/functionalTest/resources/Portlet.feature]
 3. Create User on screen (positive scenario) [/src/functionalTest/resources/User.feature]
 4. Create Page (positive scenario) [/src/functionalTest/resources/Page.feature]
+5. Create come forms structure (positive scenario) [/src/functionalTest/resources/Forms.feature]
 
 ## Unit Samples (Unit Tests):
 
