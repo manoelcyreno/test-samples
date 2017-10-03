@@ -2,6 +2,11 @@ package com.liferay.samples.functional.test.steps;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+
+import com.liferay.gs.testFramework.SeleniumReadPropertyKeys;
 import com.liferay.gs.testFramework.SeleniumWaitMethods;
 import com.liferay.samples.functional.test.pages.FormsPage;
 import com.liferay.samples.functional.test.utils.CommonMethods;
@@ -15,12 +20,23 @@ public class FormsStepDefinitions {
 	CommonMethods commonMethods = new CommonMethods();
 	FormsPage formsPage = new FormsPage();
 
+	
+
 	@Given("^I will create a forms with the (-?[^\"]*) and (-?[^\"]*)$")
 	public void i_will_create_a_forms_with_the_formsTitle_and_pageTitle(String formsTitle, String pageTitle) {
 		formsPage.clickOnAddButton();
+		
 		SeleniumWaitMethods.waitLongTime();
-		SeleniumWaitMethods.waitLongTime();
-		SeleniumWaitMethods.waitMediumTime();
+		By loaderLocator = By.xpath(".//*[contains(@class,'loading-animation')]");
+		SeleniumReadPropertyKeys.DRIVER.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+		try {
+			while (SeleniumReadPropertyKeys.DRIVER.findElement(loaderLocator).isDisplayed()) {
+				SeleniumWaitMethods.waitShortTime();
+			}
+		} catch (Exception e) {
+			System.out.println("The loader is not appear anymore");
+		}
+
 		formsPage.fillTitlePageLocator(pageTitle);
 		formsPage.fillTitleFormsLocator(formsTitle);
 	}
@@ -29,13 +45,11 @@ public class FormsStepDefinitions {
 	public void i_will_create_a_forms_with_the_field(String field) {
 
 		formsPage.clickFieldToAddOnForm(field);
-//		formsPage.fillFormTextBodyTextLocator(field);
-		System.out.println(field);
 		formsPage.clickOnPublishFormButton();
 	}
 
-	@Then("^The user will be redirect to a new forms page$")
-	public void the_user_will_be_redirect_to_a_new_forms_page() {
-		assertTrue(formsPage.isTheNewForm());
+	@Then("^The sucess message appear on Forms$")
+	public void the_sucess_message_appear_on_forms() {
+		assertTrue(formsPage.isDisplayedTheSucessMessageOnForms());
 	}
 }

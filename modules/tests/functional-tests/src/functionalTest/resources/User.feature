@@ -12,5 +12,5 @@ Scenario Outline: Create User
 	Then The <ScreenName> will appear on user list
 
 	Examples:
-    | ScreenName  |  EmailAddress  |  FirstName  |  LastName  |  Password  |
-    |     test    |test@liferay.com|    test     |   test     |   test     |
+    | ScreenName  |  EmailAddress   |  FirstName  |  LastName  |  Password  |
+    |     test2   |test2@liferay.com|    test2    |   test2    |   test2    |

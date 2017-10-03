@@ -10,7 +10,7 @@ Background: Logged with success
 Scenario Outline: Create Forms with only one fields
 	Given I will create a forms with the <FormsTitle> and <PageTitle>
 	When I will create a forms with the field: <Field>
-	Then The user will be redirect to a new forms page
+	Then The sucess message appear on Forms
 
 	Examples:
     |FormsTitle                      | PageTitle  |           Field    |

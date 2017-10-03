@@ -3,6 +3,8 @@ package com.liferay.samples.functional.test.pages;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,6 +24,10 @@ public class FormsPage {
 	private final By titlePageLocator = By.xpath(
 			".//*[@id='_com_liferay_dynamic_data_lists_form_web_portlet_DDLFormAdminPortlet_formBuilder']//textarea[1]");
 
+	private final By successMesageLocator = By
+			.xpath(".//*[contains(@class, 'alert-success') and contains(@class, 'alert-success-content')]");
+
+	
 	private final By addFieldLocator = By.xpath(
 			".//*[contains(@class,'form-builder-field-list-add-button') and contains(@class,'form-builder-field-list-add-button-large')]");
 
@@ -67,7 +73,15 @@ public class FormsPage {
 		SeleniumReadPropertyKeys.DRIVER.findElement(fieldToAddOnFormLocator).click();
 
 		SeleniumWaitMethods.waitLongTime();
-		SeleniumWaitMethods.waitMediumTime();
+		By loaderLocator = By.xpath(".//*[contains(@class,'loading-icon')]");
+		SeleniumReadPropertyKeys.DRIVER.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+		try {
+			while (SeleniumReadPropertyKeys.DRIVER.findElement(loaderLocator).isDisplayed()) {
+				SeleniumWaitMethods.waitShortTime();
+			}
+		} catch (Exception e) {
+			System.out.println("The loader is not appear anymore");
+		}
 
 		By fieldOnScreen = By.cssSelector(".form-builder-field-content-target");
 
@@ -83,12 +97,11 @@ public class FormsPage {
 		SeleniumReadPropertyKeys.DRIVER.findElement(publishFormLocator).click();
 	}
 
-	public boolean isTheNewForm() {
+	public boolean isDisplayedTheSucessMessageOnForms() {
 		SeleniumWaitMethods.waitMediumTime();
-		commonMethods.waitElement(titleFormsLocator);
-		SeleniumReadPropertyKeys.DRIVER.findElement(titleFormsLocator).click();
-		Boolean titleIsEmpty = SeleniumReadPropertyKeys.DRIVER.findElement(titleFormsLocator).getText().isEmpty();
-		return titleIsEmpty;
+		commonMethods.waitElement(successMesageLocator);
+		Boolean successMesageFromFormsAppear = SeleniumReadPropertyKeys.DRIVER.findElement(successMesageLocator).isDisplayed();
+		return successMesageFromFormsAppear;
 	}
 
 }
