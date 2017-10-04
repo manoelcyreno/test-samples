@@ -1,0 +1,98 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+group = 'com.liferay.samples'
+version = '1.0.0-SNAPSHOT'
+
+description = """Samples Integration Test Module"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+    mavenLocal()
+}
+
+project.ext {
+	junitVersion = '4.12'
+	lfrgsSeleniumCommonsVersion = '2.0.1'
+	mockitoVersion = '2.10.0'
+}
+
+dependencies {
+	compile group: "org.json", name: "org.json", version: "2.0"
+    compile 'com.liferay.gs:lfrgs-selenium-commons:' + lfrgsSeleniumCommonsVersion
+	    
+	testCompile 'org.mockito:mockito-core:' + mockitoVersion	
+    testCompile 'junit:junit:' + junitVersion
+}
+
+tasks.withType(Test) {
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut"
+        showExceptions true
+        exceptionFormat "full"
+        showCauses true
+        showStackTraces true
+
+        afterSuite { desc, result ->
+            if (!desc.parent) {
+                def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+                def startItem = '|  ', endItem = '  |'
+                def repeatLength = startItem.length() + output.length() + endItem.length()
+                println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+            }
+        }
+    }
+}
+
+tasks.withType(Test) {
+    reports.html.destination = file("${reporting.baseDir}/${name}")
+}
+
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integrationTest/java')
+        }
+        resources.srcDir file('src/integrationTest/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
+task integrationTest(type: Test) {
+    description 'Runs the Integration Tests.'
+
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    outputs.upToDateWhen { false }
+}
+
+check.dependsOn integrationTest
+
+gradle.taskGraph.whenReady { graph ->
+    if (graph.hasTask(build)) {
+        integrationTest.enabled = false
+    }
+}
+
+dependencies {
+	integrationTestCompile(
+            'org.springframework:spring-beans:4.2.5.RELEASE'
+    )
+    integrationTestRuntime(
+            'org.springframework:spring-context:4.2.5.RELEASE',
+            'org.springframework:spring-test:4.2.5.RELEASE',
+            'org.springframework:spring-tx:4.2.5.RELEASE'
+    )
+}
