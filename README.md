@@ -10,6 +10,10 @@ These SAMPLES are based on Liferay GS Selenium Commons Framework, that code can 
 4. Create Page (positive scenario) [/src/functionalTest/resources/Page.feature]
 5. Create some forms structure (positive scenario) [/src/functionalTest/resources/Forms.feature]
 
+## Integration Samples (Integration Tests):
+
+1. Create and Delete a Page By Rest API (positive and negative scenarios)
+
 ## Unit Samples (Unit Tests):
 
 1. Notes from a student (positive and negative scenarios) [samples1]
@@ -31,14 +35,23 @@ These SAMPLES are based on Liferay GS Selenium Commons Framework, that code can 
 
 ## How Run after step above?
 
-### Run by line command.
+### Run by line command into the specific test folder.
 
-`./gradlew cucumberTest` into the root folder or into the functional-tests folder.
-<br> `./gradlew unitTest` into the root folder or into the unit-tests folder.
+`./gradlew cucumberTest` into the functional-tests folder.
+<br> `./gradlew integrationTest` into the unit-tests folder.
+<br> `./gradlew unitTest` into the unit-tests folder.
+
+### Run by line command into the root folder.
+
+`./gradlew modules:tests:functional-tests:cucumberTest` into the root folder.
+<br> `./gradlew modules:tests:integration-tests:integrationTest` into the root folder.
+<br> `./gradlew modules:tests:unit-tests:unitTest` into the root folder.
+
 
 ### Run by IDE.
 
 `runTest.java` into the src/functionalTest/java/com/liferay/samples/functional/test folder.
+<br> `runTest.java` into the src/integrationTest/java/com/liferay/samples/integration/test folder.
 <br> `runTest.java` into the src/unitTest/java/com/liferay/samples(1 or 2)/unit/test folder.
 
 ## Goal of wiki project
