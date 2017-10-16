@@ -30,7 +30,7 @@ public class runTeste {
 			orderChange.change(new Long(777));
 		} catch (Exception e) {
 			assertTrue(e.getMessage().contains("It is not allowed to exchange a canceled order"));
-			System.out.println(e.toString());
+//			System.out.println(e.toString());
 		}
 	}
 }
