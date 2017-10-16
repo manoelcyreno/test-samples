@@ -18,6 +18,7 @@ These SAMPLES are based on Liferay GS Selenium Commons Framework, that code can 
 
 1. Notes from a student (positive and negative scenarios) [samples1]
 2. Product Exchange (positive scenario) [samples2]
+3. TestApp portlet that is a portlet how print some text on it own portlet. (positive and negative scenarios) [samples3]
 
 ## How Use?
 
@@ -52,7 +53,7 @@ These SAMPLES are based on Liferay GS Selenium Commons Framework, that code can 
 
 `runTest.java` into the src/functionalTest/java/com/liferay/samples/functional/test folder.
 <br> `runTest.java` into the src/integrationTest/java/com/liferay/samples/integration/test folder.
-<br> `runTest.java` into the src/unitTest/java/com/liferay/samples(1 or 2)/unit/test folder.
+<br> `runTest.java` into the src/unitTest/java/com/liferay/samples(1, 2 or 3)/unit/test folder.
 
 ## Goal of wiki project
 
