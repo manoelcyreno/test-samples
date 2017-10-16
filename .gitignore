@@ -59,3 +59,4 @@ gradle-app.setting
 lfrgs-selenium-commons.iml
 .idea/modules.xml
 .gradletasknamecache
+bundles/

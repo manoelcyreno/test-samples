@@ -1,4 +1,4 @@
-rootProject.name = 'lfrgs-selenium-samples'
+rootProject.name = 'lfrgs-tests-samples'
 
 gradle.allprojects {
 	buildscript {
