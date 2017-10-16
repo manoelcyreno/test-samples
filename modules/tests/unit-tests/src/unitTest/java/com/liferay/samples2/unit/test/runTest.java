@@ -11,7 +11,7 @@ import com.liferay.samples2.OrderDao;
 import com.liferay.samples2.OrderStatus;
 import com.liferay.samples2.OrderChange;
 
-public class runTeste {
+public class runTest {
 
 	OrderDao orderDao = mock(OrderDao.class);
 
