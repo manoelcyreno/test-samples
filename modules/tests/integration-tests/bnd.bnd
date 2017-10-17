@@ -1,4 +1,3 @@
 Bundle-Name: integration-tests
 Bundle-SymbolicName: integration.tests
 Bundle-Version: 1.0.0
-Export-Package: integration.tests.constants
