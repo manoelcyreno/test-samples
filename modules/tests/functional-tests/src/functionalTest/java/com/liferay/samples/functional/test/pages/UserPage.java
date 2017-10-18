@@ -3,6 +3,7 @@ package com.liferay.samples.functional.test.pages;
 import org.openqa.selenium.By;
 
 import com.liferay.gs.testFramework.SeleniumReadPropertyKeys;
+import com.liferay.gs.testFramework.SeleniumWaitMethods;
 import com.liferay.samples.functional.test.utils.CommonMethods;
 
 public class UserPage {
@@ -21,6 +22,9 @@ public class UserPage {
 			.xpath(".//*[@id='_com_liferay_users_admin_web_portlet_UsersAdminPortlet_lastName']");
 	private final By saveButtonLocator = By.xpath(
 			".//button[contains(@id, '_com_liferay_users_admin_web_portlet_UsersAdminPortlet')]//*[contains(text(), 'Sa')]");
+	
+	private final By passwordTitleLocator = By
+			.xpath(".//*[@id='passwordTitle']/a");
 	private final By passwordLocator = By
 			.xpath(".//*[@id='_com_liferay_users_admin_web_portlet_UsersAdminPortlet_password1']");
 	private final By RepeatPasswordLocator = By
@@ -57,7 +61,17 @@ public class UserPage {
 	}
 
 	public void fillPasswordField(String password) {
-		commonMethods.input(passwordLocator, password);
+		try {
+			if (SeleniumReadPropertyKeys.DRIVER.findElement(passwordLocator).isDisplayed()) {
+				commonMethods.input(passwordLocator, password);
+			} else {
+				SeleniumReadPropertyKeys.DRIVER.findElement(passwordTitleLocator).click();
+				commonMethods.input(passwordLocator, password);
+			}
+		} catch (Exception e) {
+			System.out.println("The passwordLocator is not appear");
+		}
+		
 	}
 
 	public void fillRepeatPasswordField(String password) {
