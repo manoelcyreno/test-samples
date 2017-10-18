@@ -17,7 +17,7 @@ public class FormsPage {
 
 	CommonMethods commonMethods = new CommonMethods();
 
-	private final By FormsLocator = By.xpath(".//*[@data-qa-id='headerTitle']");
+	private final By FormsLocator = By.xpath(".//*[@id='portlet_com_liferay_dynamic_data_lists_form_web_portlet_DDLFormAdminPortlet']");
 	private final By addLocator = By.xpath(".//*[@data-qa-id='addButton']");
 	private final By titleFormsLocator = By
 			.xpath(".//*[@id='_com_liferay_dynamic_data_lists_form_web_portlet_DDLFormAdminPortlet_nameEditor']");
