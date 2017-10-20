@@ -38,11 +38,13 @@ These SAMPLES are based on Liferay GS Selenium Commons Framework, that code can 
 
 ### Run by line command into the specific test folder.
 
-`./gradlew cucumberTest` into the functional-tests folder.
-<br> `./gradlew integrationTest` into the unit-tests folder.
-<br> `./gradlew unitTest` into the unit-tests folder.
+`gradle cucumberTest` into the functional-tests folder.
+<br> `gradle integrationTest` into the unit-tests folder.
+<br> `gradle unitTest` into the unit-tests folder.
 
 ### Run by line command into the root folder.
+
+Configure your project according: (https://github.com/manoelcyreno/lfrgs-selenium-commons/wiki/Setup#how-to-use-with-gradle-command)
 
 `./gradlew modules:tests:functional-tests:cucumberTest` into the root folder.
 <br> `./gradlew modules:tests:integration-tests:integrationTest` into the root folder.
@@ -50,6 +52,8 @@ These SAMPLES are based on Liferay GS Selenium Commons Framework, that code can 
 
 
 ### Run by IDE.
+
+Configure your project according: (https://github.com/manoelcyreno/lfrgs-selenium-commons/wiki/Setup#how-to-use-with-gradle-in-one-programming-ide-eg-eclipse-ide)
 
 `runTest.java` into the src/functionalTest/java/com/liferay/samples/functional/test folder.
 <br> `runTest.java` into the src/integrationTest/java/com/liferay/samples/integration/test folder.
