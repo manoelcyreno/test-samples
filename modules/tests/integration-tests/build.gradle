@@ -19,7 +19,7 @@ repositories {
 
 project.ext {
 	junitVersion = '4.12'
-	lfrgsSeleniumCommonsVersion = '2.0.1'
+	lfrgsSeleniumCommonsVersion = '2.1.0'
 	mockitoVersion = '2.10.0'
 }
 

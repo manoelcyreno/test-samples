@@ -52,7 +52,6 @@ fabric.properties
 /caches/
 /daemon/
 /native/
-/wrapper/
 .idea
 *.idea/
 gradle-app.setting
