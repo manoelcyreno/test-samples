@@ -47,6 +47,7 @@ fabric.properties
 *.ear
 .gradle
 /build/
+/modules/tests/functional-tests/SeleniumProperties/
 /modules/tests/functional-tests/reports/
 /modules/tests/unit-tests/reports/
 /caches/

@@ -21,7 +21,7 @@ project.ext {
 	junitVersion = '4.12'
 	seleniumVersion = '3.3.1'
 	cucumberVersion = '1.2.5'
-	lfrgsSeleniumCommonsVersion = '2.1.0'
+	lfrgsSeleniumCommonsVersion = '2.1.1'
 }
 
 dependencies {
