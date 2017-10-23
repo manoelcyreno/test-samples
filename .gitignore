@@ -48,6 +48,7 @@ fabric.properties
 .gradle
 /build/
 /modules/tests/functional-tests/SeleniumProperties/
+/modules/tests/integration-tests/SeleniumProperties/
 /modules/tests/functional-tests/reports/
 /modules/tests/unit-tests/reports/
 /caches/
