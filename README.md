@@ -25,7 +25,7 @@ These SAMPLES are based on Liferay GS Selenium Commons Framework, that code can 
 1. Download the "tests-sample-code.sh" file, into the Gradle project root folder.
 2. Set the permission to execute on "tests-sample-code.sh" file (command: chmod +x tests-sample-code.sh)
 3. Run the "tests-sample-code.sh" file (command: ./tests-sample-code.sh)
-4. Configure your `defaultProperties.properties` and your `web driver` according the Framework Setup (https://github.com/manoelcyreno/lfrgs-selenium-commons/wiki/Setup)
+4. Configure your `SeleniumPropertyKeys.properties` and yours `drivers` according the Framework Setup (https://github.com/manoelcyreno/lfrgs-selenium-commons/wiki/Setup)
 
 ### What this script will make?
 
@@ -44,7 +44,7 @@ These SAMPLES are based on Liferay GS Selenium Commons Framework, that code can 
 
 ### Run by line command into the root folder.
 
-Configure your project according: (https://github.com/manoelcyreno/lfrgs-selenium-commons/wiki/Setup#how-to-use-with-gradle-command)
+Configure your project according: (https://github.com/manoelcyreno/lfrgs-selenium-commons/wiki/Setup#how-to-use)
 
 `./gradlew modules:tests:functional-tests:cucumberTest` into the root folder.
 <br> `./gradlew modules:tests:integration-tests:integrationTest` into the root folder.
@@ -53,7 +53,7 @@ Configure your project according: (https://github.com/manoelcyreno/lfrgs-seleniu
 
 ### Run by IDE.
 
-Configure your project according: (https://github.com/manoelcyreno/lfrgs-selenium-commons/wiki/Setup#how-to-use-with-gradle-in-one-programming-ide-eg-eclipse-ide)
+Configure your project according: (https://github.com/manoelcyreno/lfrgs-selenium-commons/wiki/Setup#how-to-use)
 
 `runTest.java` into the src/functionalTest/java/com/liferay/samples/functional/test folder.
 <br> `runTest.java` into the src/integrationTest/java/com/liferay/samples/integration/test folder.
