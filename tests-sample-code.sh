@@ -8,6 +8,7 @@ mv src BACKUP_src
 mv settings.gradle BACKUP_settings.gradle
 
 mkdir modules/
+mkdir JMeterScripts/
 
 echo '---------------------------------------------------------------'
 echo 'Create the "TEMP" configuration'
@@ -21,6 +22,11 @@ echo 'Create the "SAMPLES" codes'
 echo '---------------------------------------------------------------'
 cp -r lfrgs-selenium-samples/modules/* ../modules/
 cp -rf lfrgs-selenium-samples/settings.gradle ../settings.gradle
+
+echo '---------------------------------------------------------------'
+echo 'Create the "JMeter Scripts" samples codes'
+echo '---------------------------------------------------------------'
+cp -r lfrgs-selenium-samples/JMeterScripts/* ../JMeterScripts/
 
 echo '---------------------------------------------------------------'
 echo 'Remove the "TEMP" configuration'
