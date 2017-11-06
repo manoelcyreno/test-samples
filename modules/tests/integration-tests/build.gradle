@@ -1,3 +1,9 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
+plugins {
+    id "de.undercouch.download" version "3.1.2"
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
@@ -19,14 +25,20 @@ repositories {
 
 project.ext {
 	junitVersion = '4.12'
-	lfrgsSeleniumCommonsVersion = '2.1.5'
 	mockitoVersion = '2.10.0'
+	seleniumVersion = '3.3.1'
+	lfrgsSeleniumCommonsVersion = '2.1.5'
 }
 
 dependencies {
 	compile group: "org.json", name: "org.json", version: "2.0"
-    compile 'com.liferay.gs:lfrgs-selenium-commons:' + lfrgsSeleniumCommonsVersion
-	    
+	
+	compile 'com.liferay.gs:lfrgs-selenium-commons:' + lfrgsSeleniumCommonsVersion
+	compile 'org.seleniumhq.selenium:selenium-api:' + seleniumVersion
+	compile 'org.seleniumhq.selenium:selenium-java:' + seleniumVersion
+	compile 'org.seleniumhq.selenium:selenium-remote-driver:' + seleniumVersion
+	compile 'org.seleniumhq.selenium:selenium-support:' + seleniumVersion
+	
 	testCompile 'org.mockito:mockito-core:' + mockitoVersion	
     testCompile 'junit:junit:' + junitVersion
 }
@@ -95,4 +107,68 @@ dependencies {
             'org.springframework:spring-test:4.2.5.RELEASE',
             'org.springframework:spring-tx:4.2.5.RELEASE'
     )
+}
+
+task setupIntegrationTestWithGoogleChrome {
+    description 'Create the Integration Tests properties and Chrome Driver, but only work if run on project root folder.'
+
+	doLast {
+		def baseDir =  "${project.hasProperty('liferay.workspace.home.dir') ? project.property('liferay.workspace.home.dir') : 'modules'}"
+		def SeleniumPropertyKeysPath = new File( 'modules/tests/integration-tests/SeleniumProperties' )
+		def SeleniumPropertyKeysFile = new File( 'modules/tests/integration-tests/SeleniumProperties/SeleniumPropertyKeys.properties' )
+		println "You should run this task only on your project root folder"
+		if( !SeleniumPropertyKeysFile.exists() ) {
+			println "Create Configuration for use a local SeleniumPropertyKeys.properties"
+			SeleniumPropertyKeysPath.mkdirs()
+			SeleniumPropertyKeysFile.withWriterAppend { w ->
+				w <<  "browser=defaultGC\ntime-out=10"
+			}
+		} else {
+			println "You already had the local SeleniumPropertyKeys.properties created"
+		}
+		
+		if ( (Os.isFamily(Os.FAMILY_WINDOWS)) && (!new File( baseDir + '/tests/integration-tests/SeleniumProperties/chromedriver.exe').exists()) ) {
+			println "Create Configuration for Windows to use the Google Chrome Driver"
+			download {
+				src 'https://chromedriver.storage.googleapis.com/2.33/chromedriver_win32.zip'
+				dest new File(SeleniumPropertyKeysPath, 'chromedriver_win32.zip')
+			}
+
+			copy {
+				def DriverPath = new File ('/SeleniumProperties/')
+				from zipTree('/SeleniumProperties/chromedriver_win32.zip')
+				into "SeleniumProperties/"
+			}
+			delete 'SeleniumProperties/chromedriver_win32.zip'
+
+		} else if ( (Os.isFamily(Os.FAMILY_MAC)) && (!new File( baseDir + '/tests/integration-tests/SeleniumProperties/chromedriver').exists()) ) {
+			println "Create Configuration for Mac to use the Google Chrome Driver"
+			download {
+				src 'https://chromedriver.storage.googleapis.com/2.33/chromedriver_mac64.zip'
+				dest new File(SeleniumPropertyKeysPath, 'chromedriver_mac64.zip')
+			}
+            
+			copy {
+				def DriverPath = new File ('/SeleniumProperties/')
+				from zipTree('SeleniumProperties/chromedriver_mac64.zip')
+				into "SeleniumProperties/"
+			}
+			delete 'SeleniumProperties/chromedriver_mac64.zip'
+
+		} else if ( (Os.isFamily(Os.FAMILY_UNIX)) && (!new File( baseDir + '/tests/integration-tests/SeleniumProperties/chromedriver').exists()) ) {
+			println "Create Configuration for Unix to use the Google Chrome Driver"
+			download {
+				src 'https://chromedriver.storage.googleapis.com/2.33/chromedriver_linux64.zip'
+				dest new File(SeleniumPropertyKeysPath, 'chromedriver_linux64.zip')
+			}
+
+			copy {
+				from zipTree(new File('SeleniumProperties/', 'chromedriver_linux64.zip'))
+				into "SeleniumProperties/"
+			}
+			delete 'SeleniumProperties/chromedriver_linux64.zip'
+		  } else {
+			println "You already had the local Google Chrome Driver created"
+		}
+	}
 }
