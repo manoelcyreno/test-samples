@@ -27,7 +27,7 @@ These SAMPLES are based on Liferay GS Selenium Commons Framework, that code can 
 1. Download the "tests-sample-code.sh" file, into the Gradle project root folder.
 2. Set the permission to execute on "tests-sample-code.sh" file (command: chmod +x tests-sample-code.sh)
 3. Run the "tests-sample-code.sh" file (command: ./tests-sample-code.sh)
-4. Configure your `SeleniumPropertyKeys.properties` and yours `drivers` according the Framework Setup (https://github.com/manoelcyreno/lfrgs-selenium-commons/wiki/Setup)
+4. Configure your `SeleniumPropertyKeys.properties` and yours `drivers` according the Framework Setup (https://github.com/manoelcyreno/lfrgs-tests-samples/wiki/Create-the-configuration-aut%C3%B3mat%C3%ADcly)
 
 ### What this script will make?
 
