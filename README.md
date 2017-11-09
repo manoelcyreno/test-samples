@@ -1,4 +1,4 @@
-[![Build Status](https://semaphoreci.com/api/v1/manoelcyreno/lfrgs-tests-samples/branches/master/badge.svg)](https://semaphoreci.com/manoelcyreno/lfrgs-tests-samples)
+*This project is deprecated/was discontinued, the new one is: [Tests Samples Framework](https://bitbucket.org/gs-br/frw-tests-samples)*
 
 # Welcome to Liferay GS Tests Samples.
 
