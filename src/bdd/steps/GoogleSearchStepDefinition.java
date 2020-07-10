@@ -3,8 +3,8 @@ package steps;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import com.liferay.gs.testFramework.FunctionalTest;
-import com.liferay.gs.testFramework.core.SeleniumReadPropertyKeys;
+import com.selenium.commons.testFramework.FunctionalTest;
+import com.selenium.commons.testFramework.core.SeleniumReadPropertyKeys;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -17,7 +17,7 @@ import pages.GooglePageBDD;
  */
 public class GoogleSearchStepDefinition extends FunctionalTest {
 
-	GooglePageBDD gpbdd  = new GooglePageBDD(getWebDriver());
+	GooglePageBDD gpbdd  = new GooglePageBDD();
 	
 	@Given("^I am on Google Page$")
 	public void i_am_on_Google_Page() {
