@@ -74,10 +74,17 @@ tasks.withType(Test) {
             }
         }
     }
+  dependsOn 'cleanTest'
 }
 
-tasks.withType(Test) {
-    reports.html.destination = file("${reporting.baseDir}/${name}")
+// unit test settings
+sourceSets {
+  test {
+    java {
+      srcDir 'src/main'
+      srcDir 'src/test'
+    }
+  }
 }
 
 task setupTestToRunIntoGoogleChrome {
