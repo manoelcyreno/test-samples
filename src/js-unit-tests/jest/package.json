@@ -1,0 +1,35 @@
+{
+  "name": "jest_sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/jest_sample.js",
+  "directories": {
+    "test": "__tests__"
+  },
+  "scripts": {
+    "build": "webpack",
+    "clean": "rm -rf coverage/ build/ node_modules/ && npm i",
+    "test": "jest",
+    "test:coverage": "jest --coverage && http-server coverage/lcov-report -p 4000 -o",
+    "test:watch": "jest --watchAll"
+  },
+  "author": "Liferay Inc.",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-env": "^1.6.1",
+    "http-server": "^0.11.1",
+    "jest": "22.1.4",
+    "uglifyjs-webpack-plugin": "^1.1.6",
+    "webpack": "^2.2.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/*.js"
+    ]
+  },
+  "dependencies": {
+    "whatwg-fetch": "^2.0.3"
+  }
+}
