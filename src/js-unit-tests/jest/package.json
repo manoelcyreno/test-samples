@@ -25,6 +25,8 @@
     "webpack": "^2.2.1"
   },
   "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/",
     "collectCoverageFrom": [
       "src/*.js"
     ]
