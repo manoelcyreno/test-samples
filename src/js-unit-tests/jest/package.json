@@ -22,7 +22,7 @@
     "http-server": "^0.11.1",
     "jest": "22.1.4",
     "uglifyjs-webpack-plugin": "^1.1.6",
-    "webpack": "^5.74.0"
+    "webpack": "^5.76.0"
   },
   "jest": {
     "verbose": true,
